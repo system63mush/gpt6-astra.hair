@@ -10,8 +10,6 @@ const PLANS = Object.freeze({
   plus: { name: "ChatGPT Plus", price: 168, unit: "月" },
   pro5: { name: "ChatGPT Pro 5X", price: 825, unit: "月" },
   pro20: { name: "ChatGPT Pro 20X", price: 1480, unit: "月" },
-  basic: { name: "ChatGPT 普通号", price: 15, unit: "个" },
-  ready: { name: "ChatGPT Plus 成品号", price: 176, unit: "个" },
   claudePro: { name: "Claude Pro 订阅协助", price: 188, unit: "" },
   claudeMax5: { name: "Claude Max 5X", price: 850, unit: "" },
   claudeMax20: { name: "Claude Max 20X", price: 1580, unit: "" },
