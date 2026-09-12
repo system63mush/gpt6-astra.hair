@@ -132,6 +132,29 @@
 .gemini-icon { background: #edf1ff; color: #596fce; }
 .grok-icon { background: #27372f; color: #fff; }
 .selected-plan { align-items: center; }
+/* Warranty terms remain visible below every subscription category. */
+.warranty-policy {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 16px;
+  margin-top: 28px;
+  padding: 24px;
+  background: #f7faf7;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.warranty-policy h2 { margin: 0; font-size: 18px; line-height: 1.8; }
+.warranty-list { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.9; color: #536559; }
+.warranty-list li + li { margin-top: 6px; }
+.warranty-list strong { color: var(--ink); font-weight: 600; }
+.dialog-warranty { margin: 0 0 18px; text-align: left; }
+.dialog-warranty summary { width: fit-content; margin: 0 auto; color: var(--green); font-size: 13px; cursor: pointer; padding: 5px 0; }
+.dialog-warranty .warranty-list { margin-top: 10px; padding: 12px 12px 12px 30px; border-radius: 8px; background: #f7faf7; font-size: 12px; }
+@media (max-width: 640px) {
+  .warranty-policy { grid-template-columns: 1fr; padding: 20px; gap: 10px; }
+  .warranty-policy h2 { font-size: 17px; }
+  .warranty-policy .warranty-list { font-size: 13px; }
+}
 /* Keep five ChatGPT options readable across desktop and tablet widths. */
 @media (min-width: 1280px) {
   #panel-recharge { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
