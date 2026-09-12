@@ -97,6 +97,15 @@
 }
 .plan-card:not(.is-selected):focus-within { border-color: #96bba5; box-shadow: 0 0 0 2px #168b6010; }
 .plan-card .recommend { background: #eaf2ed; color: #51725d; border: 1px solid #dce9e0; }
+/* The special offer keeps its own background in every selection state. */
+.plan-card[data-card-plan="plusSpecial"] {
+  background: radial-gradient(circle at 100% 0, #ffe2a880, transparent 48%), linear-gradient(160deg, #fff3d9 0%, #fffaf0 58%, #fff4df 100%);
+}
+.plan-card[data-card-plan="plusSpecial"] .recommend {
+  background: #ffebbc;
+  border-color: #efd49a;
+  color: #805b16;
+}
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .plan-card:not(.is-selected):hover { border-color: #96bba5; }
   .plan-card.is-selected:hover { border-color: var(--green); box-shadow: 0 18px 38px #145d3520, 0 0 0 1px #168b6029; }
