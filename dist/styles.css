@@ -9,3 +9,69 @@
 
 /* Compact package-first layout. */
 .header{height:76px}.plans-section{padding-top:42px;padding-bottom:12px}.plans-section h1{font-size:32px;line-height:1.4;letter-spacing:-.025em;margin:0;font-weight:600;white-space:normal}.section-heading p{margin-top:10px;font-size:16px}.plan-tabs{margin:27px 0 30px}.pricing-note{margin:24px 0 12px}.simple-process{padding:20px 0 28px;border-bottom:1px solid var(--line);text-align:center}.simple-process p{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin:0;line-height:1.8}.simple-process span{color:#9bada0}.footer-bottom{padding-top:24px;padding-bottom:28px}@media(max-width:640px){.header{height:68px}.plans-section{padding-top:28px}.plans-section h1{font-size:27px}.section-heading p{font-size:14px}.plan-tabs{margin:22px 0 28px}.simple-process{padding:14px 0 24px}.simple-process p{font-size:13px;gap:9px}.footer-bottom{padding-bottom:85px}}
+
+/* Soft hover light and a brief tactile response for every product. */
+.plan-card {
+  isolation: isolate;
+  transform: none;
+  transition: transform 280ms cubic-bezier(.2,.75,.3,1.2), border-color 220ms ease, box-shadow 280ms ease;
+}
+.plan-card:hover { transform: none; box-shadow: none; }
+.plan-card.featured:hover { box-shadow: 0 5px 25px #066e4910; }
+.plan-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(280px circle at var(--glow-x, 50%) var(--glow-y, 25%), #2fbb791c, transparent 75%);
+  opacity: 0;
+  transition: opacity 240ms ease;
+  z-index: 0;
+}
+.plan-card > :not(.card-effects):not(.recommend) { position: relative; z-index: 1; }
+.plan-card .recommend { z-index: 2; }
+.plan-card:focus-within {
+  border-color: #168b60;
+  box-shadow: 0 0 0 3px #168b6014, 0 12px 30px #154c3410;
+}
+.plan-icon { transition: transform 280ms cubic-bezier(.2,.75,.3,1.2), box-shadow 220ms ease; }
+.plan-button { transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 160ms ease, box-shadow 200ms ease; }
+.plan-button .icon { transition: transform 220ms ease; }
+.plan-card:focus-within .plan-button:not(.primary) { background: #e7f4ec; border-color: #b4d8c1; color: #086544; }
+.plan-button:active { transform: scale(.97); }
+.card-effects {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.card-ripple {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: #2aa870;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .plan-card:hover {
+    transform: translateY(-7px);
+    border-color: #168b60;
+    box-shadow: 0 18px 38px #145d3517, 0 0 0 1px #168b6010;
+  }
+  .plan-card.featured:hover { box-shadow: 0 18px 38px #145d3520, 0 0 0 1px #168b601c; }
+  .plan-card:hover::before { opacity: 1; }
+  .plan-card:hover .plan-icon { transform: translateY(-2px) rotate(-5deg) scale(1.08); box-shadow: 0 5px 12px #124b3410; }
+  .plan-card:hover .plan-button:not(.primary) { background: #e7f4ec; border-color: #b4d8c1; color: #086544; }
+  .plan-card:hover .plan-button .icon { transform: translateX(4px); }
+  .plan-card .plan-button:hover { background: #087d58; border-color: #087d58; color: #fff; box-shadow: 0 5px 15px #087d5824; }
+}
+.plan-card.is-pressed { transform: translateY(-1px) scale(.985); transition-duration: 100ms; }
+@media (prefers-reduced-motion: reduce) {
+  .plan-card, .plan-card:hover, .plan-card.is-pressed, .plan-icon, .plan-button:active, .plan-button .icon { transform: none; }
+  .plan-card::before, .card-effects { display: none; }
+  .plan-card:hover { border-color: #168b60; box-shadow: 0 0 0 2px #168b6014; }
+}
