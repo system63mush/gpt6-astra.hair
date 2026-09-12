@@ -12,6 +12,13 @@ const PLANS = Object.freeze({
   pro20: { name: "ChatGPT Pro 20X", price: 1480, unit: "月" },
   basic: { name: "ChatGPT 普通号", price: 15, unit: "个" },
   ready: { name: "ChatGPT Plus 成品号", price: 176, unit: "个" },
+  claudePro: { name: "Claude Pro 订阅协助", price: 188, unit: "" },
+  claudeMax5: { name: "Claude Max 5X", price: 850, unit: "" },
+  claudeMax20: { name: "Claude Max 20X", price: 1580, unit: "" },
+  gemini1m: { name: "Gemini 开通 1个月", price: 120, unit: "1个月" },
+  gemini3m: { name: "Gemini 开通 3个月", price: 320, unit: "3个月" },
+  gemini1y: { name: "Gemini 开通 1年", price: 368, unit: "年" },
+  grok1m: { name: "Grok Super 1个月", price: 180, unit: "1个月" },
 });
 const dialog = document.getElementById("contact-dialog");
 const selectedPlan = document.getElementById("selected-plan");
@@ -48,7 +55,7 @@ function showContact(trigger, planId) {
   selectedPlan.hidden = !plan;
   if (plan) {
     document.getElementById("selected-plan-name").textContent = plan.name;
-    document.getElementById("selected-plan-price").textContent = `参考 ¥${plan.price} / ${plan.unit}`;
+    document.getElementById("selected-plan-price").textContent = `参考 ¥${plan.price}${plan.unit ? ` / ${plan.unit}` : ""}`;
   }
   lastTrigger = trigger;
   previousOverflow = document.body.style.overflow;
