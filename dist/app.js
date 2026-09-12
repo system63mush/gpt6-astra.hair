@@ -23,8 +23,28 @@ qr.src = CONTACT.qrImage;
 saveQr.href = CONTACT.qrImage;
 saveQr.download = CONTACT.downloadName;
 
+const cards = [...document.querySelectorAll(".plan-card")];
+const lastPlanByPanel = new Map();
+
+function selectProduct(card) {
+  if (!card) return;
+  cards.forEach((item) => {
+    const selected = item === card;
+    item.classList.toggle("is-selected", selected);
+    item.querySelector(".plan-choice").checked = selected;
+    item.querySelector(".plan-button").classList.toggle("primary", selected);
+  });
+  lastPlanByPanel.set(card.closest('[role="tabpanel"]').id, card.dataset.cardPlan);
+}
+
+cards.forEach((card) => {
+  card.querySelector(".plan-choice").addEventListener("change", () => selectProduct(card));
+});
+selectProduct(cards.find((card) => card.querySelector(".plan-choice").checked) || cards[0]);
+
 function showContact(trigger, planId) {
   const plan = PLANS[planId];
+  if (plan) selectProduct(trigger.closest(".plan-card"));
   selectedPlan.hidden = !plan;
   if (plan) {
     document.getElementById("selected-plan-name").textContent = plan.name;
@@ -57,8 +77,13 @@ function activateTab(tab) {
     item.setAttribute("aria-selected", String(selected));
     item.tabIndex = selected ? 0 : -1;
     item.classList.toggle("active", selected);
-    document.getElementById(item.getAttribute("aria-controls")).hidden = !selected;
+    const panel = document.getElementById(item.getAttribute("aria-controls"));
+    panel.hidden = !selected;
+    panel.querySelectorAll(".plan-choice").forEach((radio) => { radio.disabled = !selected; });
   });
+  const panel = document.getElementById(tab.getAttribute("aria-controls"));
+  const panelCards = [...panel.querySelectorAll(".plan-card")];
+  selectProduct(panelCards.find((card) => card.dataset.cardPlan === lastPlanByPanel.get(panel.id)) || panelCards[0]);
 }
 tabs.forEach((tab, index) => {
   tab.addEventListener("click", () => activateTab(tab));
@@ -75,10 +100,9 @@ tabs.forEach((tab, index) => {
   });
 });
 
-// Decorative card feedback; the recharge button remains the only purchase action.
+// Card clicks select the product; only the recharge button opens the QR dialog.
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const hoverPointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-const cards = [...document.querySelectorAll(".plan-card")];
 const resetCardEffects = [];
 
 cards.forEach((card) => {
@@ -125,9 +149,11 @@ cards.forEach((card) => {
   });
   card.addEventListener("click", (event) => {
     card.classList.remove("is-pressed");
-    if (reducedMotion.matches || event.button > 0) return;
+    if (event.button > 0) return;
     const selection = window.getSelection();
     if (selection && !selection.isCollapsed && card.contains(selection.anchorNode)) return;
+    selectProduct(card);
+    if (reducedMotion.matches) return;
 
     const bounds = card.getBoundingClientRect();
     const x = event.detail === 0 ? bounds.width / 2 : event.clientX - bounds.left;
