@@ -6,7 +6,7 @@ const CONTACT = {
   downloadName: "客服微信二维码.jpg",
 };
 const PLANS = Object.freeze({
-  plusSpecial: { name: "ChatGPT Plus 特价", price: 155, unit: "月" },
+  plusSpecial: { name: "ChatGPT Plus 特价（仅限新客）", price: 155, unit: "月" },
   go: { name: "ChatGPT Go", price: 75, unit: "月" },
   plus: { name: "ChatGPT Plus", price: 165, unit: "月" },
   pro5: { name: "ChatGPT Pro 5X", price: 815, unit: "月" },
