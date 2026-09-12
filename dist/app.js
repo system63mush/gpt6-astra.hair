@@ -2,7 +2,7 @@
 
 // Public contact configuration. Replace the QR asset here when changing support.
 const CONTACT = {
-  qrImage: "assets/wechat-support-2.jpg",
+  qrImage: "assets/wechat-support.jpg",
   downloadName: "客服微信二维码.jpg",
 };
 const PLANS = Object.freeze({
